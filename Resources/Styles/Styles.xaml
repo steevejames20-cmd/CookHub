@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls">
+
+    <!--
+        Styles communs à tous les écrans (charte graphique CookHub).
+        Typographie : Lora pour les titres, police système (Inter si installee) pour le texte.
+        Espaces : 4, 8, 12, 16, 24, 32. Marges des écrans : 24. Champs : 50 de haut, rayon 12.
+        Cartes : rayon 20.
+    -->
+
+    <!-- Polices -->
+    <x:String x:Key="TitleFont">Lora-Regular</x:String>
+    <x:String x:Key="BodyFont">Inter-Regular</x:String>
+
+    <!-- Fond de tous les écrans et couleurs du Shell -->
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Bg}" />
+    </Style>
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor" Value="{DynamicResource Bg}" />
+        <Setter Property="Shell.ForegroundColor" Value="{DynamicResource Ink}" />
+        <Setter Property="Shell.TitleColor" Value="{DynamicResource Ink}" />
+        <Setter Property="Shell.DisabledColor" Value="{DynamicResource Muted}" />
+        <Setter Property="Shell.UnselectedColor" Value="{DynamicResource Muted}" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource Primary}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource Muted}" />
+    </Style>
+
+    <!-- Textes -->
+    <Style x:Key="Body" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.4" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource Body}" />
+
+    <!-- Grand titre d'écran : Lora 32 -->
+    <Style x:Key="Display" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="LineHeight" Value="1.15" />
+    </Style>
+
+    <!-- Titre de section : Lora 23 -->
+    <Style x:Key="Heading" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+        <Setter Property="FontSize" Value="23" />
+    </Style>
+
+    <!-- Libelle de champ : 13 -->
+    <Style x:Key="Caption" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Texte d'aide : 12 -->
+    <Style x:Key="Help" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="TextColor" Value="{DynamicResource Muted}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <!-- Petite étiquette en capitales (catégorie, salutation) -->
+    <Style x:Key="Eyebrow" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="TextColor" Value="{DynamicResource Primary}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextTransform" Value="Uppercase" />
+        <Setter Property="CharacterSpacing" Value="1" />
+    </Style>
+
+    <Style x:Key="LinkLabel" TargetType="Label" BasedOn="{StaticResource Body}">
+        <Setter Property="TextColor" Value="{DynamicResource Primary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Champs de saisie -->
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Muted}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Muted}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="TitleColor" Value="{DynamicResource Muted}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Setter Property="Color" Value="{DynamicResource Primary}" />
+    </Style>
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{DynamicResource Primary}" />
+    </Style>
+
+    <!-- Boîte d'un champ (état NORMAL). Les états ACTIF et ERREUR sont gérés par FieldEntry. -->
+    <Style x:Key="FieldBox" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Stroke" Value="{DynamicResource LineBrush}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="14,0" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <shapes:RoundRectangle CornerRadius="12" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Boîte de champ multiligne : même apparence, hauteur libre -->
+    <Style x:Key="FieldBoxMulti" TargetType="Border" BasedOn="{StaticResource FieldBox}">
+        <Setter Property="HeightRequest" Value="-1" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <!-- Carte : rayon 20 -->
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Stroke" Value="{DynamicResource LineBrush}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <shapes:RoundRectangle CornerRadius="20" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Bandeau d'information (fond sauge) -->
+    <Style x:Key="Banner" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sage}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <shapes:RoundRectangle CornerRadius="12" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Bandeau d'erreur -->
+    <Style x:Key="ErrorBanner" TargetType="Border" BasedOn="{StaticResource Banner}">
+        <Setter Property="BackgroundColor" Value="{DynamicResource ErrorBg}" />
+        <Setter Property="Stroke" Value="{DynamicResource ErrorBrush}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <!-- Puce de catégorie / filtre -->
+    <Style x:Key="Chip" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Stroke" Value="{DynamicResource LineBrush}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <shapes:RoundRectangle CornerRadius="18" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Bloc gris de chargement (squelette) -->
+    <Style x:Key="SkeletonBlock" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Skeleton}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <shapes:RoundRectangle CornerRadius="12" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Bouton principal : un seul par écran. États NORMAL et DÉSACTIVÉ. -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="TextColor" Value="{DynamicResource OnPrimary}" />
+        <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{DynamicResource Disabled}" />
+                            <Setter Property="TextColor" Value="{DynamicResource DisabledText}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Bouton secondaire (fond sauge) -->
+    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sage}" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary}" />
+    </Style>
+
+</ResourceDictionary>

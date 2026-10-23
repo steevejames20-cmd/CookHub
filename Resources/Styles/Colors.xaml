@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--
+        Palette de la charte graphique CookHub : crème et potager.
+        Les noms de cette liste sont aussi utilisés par ThemeService
+        (thème sombre) : toute nouvelle couleur doit y etre répétée.
+    -->
+
+    <!-- Couleurs principales de la charte -->
+    <Color x:Key="Bg">#FAF7F0</Color>          <!-- Crème : fond des écrans -->
+    <Color x:Key="Primary">#3F6B46</Color>     <!-- Potager : action unique -->
+    <Color x:Key="Ink">#26382C</Color>         <!-- Encre : texte -->
+    <Color x:Key="Sage">#E8EEDF</Color>        <!-- Sauge : bandeaux et puces -->
+    <Color x:Key="Error">#B54335</Color>       <!-- Erreur -->
+
+    <!-- Couleurs complémentaires -->
+    <Color x:Key="Surface">#FFFFFF</Color>     <!-- Cartes et champs -->
+    <Color x:Key="Line">#D9D6CB</Color>        <!-- Bordures -->
+    <Color x:Key="Muted">#6B7A6F</Color>       <!-- Textes d'aide -->
+    <Color x:Key="OnPrimary">#FFFFFF</Color>   <!-- Texte sur bouton principal -->
+    <Color x:Key="Disabled">#D6D8CC</Color>    <!-- Bouton désactivé -->
+    <Color x:Key="DisabledText">#8C9188</Color>
+    <Color x:Key="ErrorBg">#F6E3E0</Color>     <!-- Bandeau d’erreur -->
+    <Color x:Key="Skeleton">#E9E6DD</Color>    <!-- Blocs de chargement -->
+
+    <!-- Pinceaux (les formes MAUI attendent un Brush et non une Color) -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#3F6B46" />
+    <SolidColorBrush x:Key="InkBrush" Color="#26382C" />
+    <SolidColorBrush x:Key="ErrorBrush" Color="#B54335" />
+    <SolidColorBrush x:Key="LineBrush" Color="#D9D6CB" />
+    <SolidColorBrush x:Key="MutedBrush" Color="#6B7A6F" />
+
+</ResourceDictionary>
