@@ -124,7 +124,7 @@ public partial class SearchViewModel : ObservableObject, IQueryAttributable
     [RelayCommand]
     private async Task OpenRecipeAsync(Recipe recipe)
     {
-        await Shell.Current.DisplayAlert(recipe.Name, "Le détail de la recette sera ajouté à une étape suivante.", "OK");
+        await Shell.Current.GoToAsync($"recipe?id={recipe.Id}");
     }
 
     /// <summary>Recalcule la liste des résultats selon le texte saisi et la catégorie choisie.</summary>

@@ -15,6 +15,7 @@ public partial class AppShell : Shell
         // Écrans secondaires : ouverts par-dessus l'onglet courant,
         // le retour se fait par la flèche en haut à gauche.
         Routing.RegisterRoute("register", typeof(RegisterPage));
+        Routing.RegisterRoute("recipe", typeof(DetailPage));
 
         // Session déjà ouverte : on saute l'écran de connexion.
         if (auth.IsLoggedIn)

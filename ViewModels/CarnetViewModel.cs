@@ -149,7 +149,7 @@ public partial class CarnetViewModel : ObservableObject
     [RelayCommand]
     private async Task OpenRecipeAsync(Recipe recipe)
     {
-        await Shell.Current.DisplayAlert(recipe.Name, "Le détail de la recette sera ajouté à une étape suivante.", "OK");
+        await Shell.Current.GoToAsync($"recipe?id={recipe.Id}");
     }
 
     [RelayCommand]

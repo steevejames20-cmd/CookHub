@@ -35,6 +35,10 @@ public static class MauiProgram
         builder.Services.AddTransient<SearchViewModel>();
         builder.Services.AddTransient<SearchPage>();
 
+        // Détail d'une recette
+        builder.Services.AddTransient<DetailViewModel>();
+        builder.Services.AddTransient<DetailPage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
