@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="Root" x:Class="CookHub.Views.SearchPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls"
+             Title="Recherche"
+             Shell.NavBarIsVisible="False">
+    <!-- Interfaces 4 et 11 : Recherche et filtres, puis état "recherche sans résultat". -->
+    <ScrollView>
+        <VerticalStackLayout Padding="24,24,24,24" Spacing="16">
+
+            <Label Text="Recherche" Style="{StaticResource Caption}" FontSize="15" />
+            <Label Text="Une envie en tête ?" Style="{StaticResource Display}" />
+            <Label Text="Cherchez par recette ou par ingrédient." Style="{StaticResource Help}" FontSize="14" />
+
+            <controls:FieldEntry Caption="Rechercher"
+                                 Placeholder="Une recette, un ingrédient"
+                                 Text="{Binding Query}" />
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Catégories" Style="{StaticResource Heading}" FontSize="19" />
+                <Label Grid.Column="1" Text="Réinitialiser" Style="{StaticResource LinkLabel}" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ResetCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <controls:CategoryChips Items="{Binding Categories}" Command="{Binding SelectCategoryCommand}" />
+
+            <Border Style="{StaticResource Banner}" Padding="12,8">
+                <Label Text="{Binding ScopeText}" TextColor="{DynamicResource Primary}" FontSize="12" />
+            </Border>
+
+            <!-- ETAT : résultats -->
+            <VerticalStackLayout Spacing="16" IsVisible="{Binding ShowResults}">
+                <Label Text="{Binding ResultCountText}" Style="{StaticResource Heading}" FontSize="20" />
+                <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding Results}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <controls:RecipeCard>
+                                <controls:RecipeCard.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding BindingContext.OpenRecipeCommand, Source={x:Reference Root}}"
+                                        CommandParameter="{Binding .}" />
+                                </controls:RecipeCard.GestureRecognizers>
+                            </controls:RecipeCard>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- ETAT : recherche sans résultat (propose une action plutôt qu'une impasse) -->
+            <VerticalStackLayout Spacing="14" IsVisible="{Binding ShowNoResult}">
+                <Border BackgroundColor="{DynamicResource Sage}" StrokeThickness="0"
+                        WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40" />
+                    </Border.StrokeShape>
+                    <controls:IconView Icon="search" WidthRequest="32" HeightRequest="32"
+                                       Fill="{DynamicResource PrimaryBrush}" />
+                </Border>
+                <Label Text="{Binding NoResultTitle}" Style="{StaticResource Heading}" HorizontalOptions="Center" />
+                <Label Text="{Binding NoResultText}" Style="{StaticResource Help}" FontSize="14"
+                       HorizontalTextAlignment="Center" />
+                <Button Text="Effacer la recherche" Style="{StaticResource PrimaryButton}"
+                        Command="{Binding ClearQueryCommand}" />
+                <Button Text="Voir toutes les catégories" Style="{StaticResource SecondaryButton}"
+                        Command="{Binding ShowAllCategoriesCommand}" />
+                <Label Text="Une recette manque ? Ajoutez-la à votre carnet depuis l’onglet Ajouter."
+                       Style="{StaticResource Help}" HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

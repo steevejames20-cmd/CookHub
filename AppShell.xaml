@@ -13,6 +13,8 @@
     <TabBar x:Name="MainTabs" Route="main">
         <ShellContent Title="Carnet" Icon="tab_carnet.svg" Route="carnet"
                       ContentTemplate="{DataTemplate views:CarnetPage}" />
+        <ShellContent Title="Recherche" Icon="tab_recherche.svg" Route="recherche"
+                      ContentTemplate="{DataTemplate views:SearchPage}" />
     </TabBar>
 
 </Shell>

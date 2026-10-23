@@ -31,6 +31,10 @@ public static class MauiProgram
         builder.Services.AddTransient<CarnetViewModel>();
         builder.Services.AddTransient<CarnetPage>();
 
+        // Onglet Recherche
+        builder.Services.AddTransient<SearchViewModel>();
+        builder.Services.AddTransient<SearchPage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
