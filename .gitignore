@@ -1,0 +1,13 @@
+# Dossiers générés par la compilation
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Fichiers propres à l'IDE
+.idea/
+.vscode/
+
+# Fichiers temporaires
+*.log
