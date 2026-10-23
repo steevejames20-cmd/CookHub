@@ -1,4 +1,6 @@
 using CookHub.Services;
+using CookHub.ViewModels;
+using CookHub.Views;
 using Microsoft.Extensions.Logging;
 
 namespace CookHub;
@@ -18,6 +20,24 @@ public static class MauiProgram
         builder.Services.AddSingleton<DataStore>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddSingleton<IRecipeRepository, RecipeRepository>();
+
+        // Écrans d'authentification
+        builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<RegisterViewModel>();
+        builder.Services.AddTransient<RegisterPage>();
+
+        // Onglet Carnet
+        builder.Services.AddTransient<CarnetViewModel>();
+        builder.Services.AddTransient<CarnetPage>();
+
+        // Onglet Recherche
+        builder.Services.AddTransient<SearchViewModel>();
+        builder.Services.AddTransient<SearchPage>();
+
+        // Détail d'une recette
+        builder.Services.AddTransient<DetailViewModel>();
+        builder.Services.AddTransient<DetailPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

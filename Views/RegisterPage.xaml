@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CookHub.Views.RegisterPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls"
+             Title="Créer un compte">
+    <!-- Interface 2 : Inscription (maquette, écran 1). La barre du haut vient du Shell. -->
+    <ScrollView>
+        <VerticalStackLayout Padding="24,8,24,32" Spacing="16">
+
+            <Label Text="Votre carnet commence ici." Style="{StaticResource Display}" />
+            <Label Text="Un compte, toutes vos recettes. Et le plaisir de les transmettre."
+                   Style="{StaticResource Help}" FontSize="14" />
+
+            <controls:FieldEntry Caption="Prénom"
+                                 Placeholder="Camille"
+                                 Text="{Binding FirstName}"
+                                 IsValid="{Binding FirstNameValid}"
+                                 Help="{Binding FirstNameHelp}" />
+
+            <controls:FieldEntry Caption="Adresse e-mail"
+                                 Placeholder="camille.martin@email.fr"
+                                 KeyboardType="Email"
+                                 Text="{Binding Email}"
+                                 IsValid="{Binding EmailValid}"
+                                 Help="{Binding EmailHelp}" />
+
+            <controls:FieldEntry Caption="Mot de passe"
+                                 IsPassword="True"
+                                 ShowToggle="True"
+                                 Text="{Binding Password}" />
+
+            <!-- Règles du mot de passe : coche quand la règle est respectée, cercle vide sinon -->
+            <Border Style="{StaticResource Banner}">
+                <VerticalStackLayout Spacing="8">
+                    <HorizontalStackLayout Spacing="10">
+                        <controls:IconView Icon="check" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource PrimaryBrush}" IsVisible="{Binding HasMinLength}" />
+                        <controls:IconView Icon="circle" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource MutedBrush}" IsVisible="{Binding MinLengthMissing}" />
+                        <Label Text="8 caractères minimum" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <controls:IconView Icon="check" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource PrimaryBrush}" IsVisible="{Binding HasUpperAndLower}" />
+                        <controls:IconView Icon="circle" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource MutedBrush}" IsVisible="{Binding UpperAndLowerMissing}" />
+                        <Label Text="Une majuscule et une minuscule" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <controls:IconView Icon="check" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource PrimaryBrush}" IsVisible="{Binding HasDigit}" />
+                        <controls:IconView Icon="circle" WidthRequest="16" HeightRequest="16"
+                                           Fill="{DynamicResource MutedBrush}" IsVisible="{Binding DigitMissing}" />
+                        <Label Text="Un chiffre minimum" FontSize="13" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <controls:FieldEntry Caption="Confirmer le mot de passe"
+                                 Placeholder="Confirmez votre mot de passe"
+                                 IsPassword="True"
+                                 ShowToggle="True"
+                                 Text="{Binding ConfirmPassword}"
+                                 IsValid="{Binding PasswordsMatch}"
+                                 Help="Les deux mots de passe doivent être identiques."
+                                 Error="{Binding ConfirmError}" />
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <CheckBox IsChecked="{Binding AcceptTerms}" VerticalOptions="Start" />
+                <Label Grid.Column="1" VerticalOptions="Center" FontSize="13"
+                       Text="J’accepte les conditions d’utilisation et la politique de confidentialité." />
+            </Grid>
+
+            <Border Style="{StaticResource ErrorBanner}" IsVisible="{Binding HasError}">
+                <Label Text="{Binding ErrorMessage}" TextColor="{DynamicResource Error}" />
+            </Border>
+
+            <Button Text="Créer mon carnet" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding RegisterCommand}" />
+
+            <!-- Texte de la charte pour le bouton DESACTIVE -->
+            <Label Text="Champs obligatoires incomplets. Le bouton devient disponible après validation."
+                   Style="{StaticResource Help}" IsVisible="{Binding ShowIncompleteHint}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

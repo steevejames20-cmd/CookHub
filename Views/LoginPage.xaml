@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CookHub.Views.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls"
+             Title="Connexion"
+             Shell.NavBarIsVisible="False">
+    <!-- Interface 1 : Connexion (maquette, écran 2). -->
+    <ScrollView>
+        <VerticalStackLayout Padding="24,16,24,24" Spacing="16">
+
+            <HorizontalStackLayout Spacing="8">
+                <controls:IconView Icon="book" Fill="{DynamicResource PrimaryBrush}" />
+                <Label Text="CookHub" Style="{StaticResource Heading}" />
+            </HorizontalStackLayout>
+
+            <!-- Emplacement de la photo d'accueil (fond sauge, une seule image pour rester léger) -->
+            <Border Style="{StaticResource Banner}" HeightRequest="170" Padding="0">
+                <controls:IconView Icon="book" WidthRequest="56" HeightRequest="56"
+                                   Fill="{DynamicResource PrimaryBrush}" />
+            </Border>
+
+            <Label Text="Les bonnes recettes restent à portée de main." Style="{StaticResource Display}" />
+            <Label Text="Retrouvez, cuisinez et partagez vos recettes préférées. Bienvenue dans votre carnet."
+                   Style="{StaticResource Help}" FontSize="14" />
+
+            <controls:FieldEntry Caption="Adresse e-mail"
+                                 Placeholder="camille.martin@email.fr"
+                                 KeyboardType="Email"
+                                 Text="{Binding Email}"
+                                 IsValid="{Binding EmailValid}" />
+
+            <controls:FieldEntry Caption="Mot de passe"
+                                 Placeholder="Votre mot de passe"
+                                 IsPassword="True"
+                                 ShowToggle="True"
+                                 Text="{Binding Password}" />
+
+            <Label Text="Mot de passe oublié ?" Style="{StaticResource LinkLabel}" HorizontalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Erreur de connexion (état ERREUR) -->
+            <Border Style="{StaticResource ErrorBanner}" IsVisible="{Binding HasError}">
+                <Label Text="{Binding ErrorMessage}" TextColor="{DynamicResource Error}" />
+            </Border>
+
+            <!-- Bouton principal : DESACTIVE tant que les champs sont incomplets -->
+            <Button Text="Se connecter" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding LoginCommand}" />
+
+            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Pas encore de carnet ? " />
+                        <Span Text="S’inscrire" FontAttributes="Bold" TextColor="{DynamicResource Primary}" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

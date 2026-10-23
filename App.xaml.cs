@@ -7,9 +7,10 @@ namespace CookHub;
 /// </summary>
 public partial class App : Application
 {
-    public App()
+    public App(IAuthService auth)
     {
         InitializeComponent();
-        MainPage = new AppShell();
+        // Le Shell choisit l'écran de départ selon la présence d'une session ouverte.
+        MainPage = new AppShell(auth);
     }
 }
