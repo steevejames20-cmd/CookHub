@@ -17,6 +17,8 @@
                       ContentTemplate="{DataTemplate views:SearchPage}" />
         <ShellContent Title="Ajouter" Icon="tab_ajouter.svg" Route="ajouter"
                       ContentTemplate="{DataTemplate views:AddRecipePage}" />
+        <ShellContent Title="Catégories" Icon="tab_categories.svg" Route="categories"
+                      ContentTemplate="{DataTemplate views:CategoriesPage}" />
     </TabBar>
 
 </Shell>

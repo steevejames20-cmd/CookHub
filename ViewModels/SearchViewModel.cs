@@ -117,8 +117,7 @@ public partial class SearchViewModel : ObservableObject, IQueryAttributable
     [RelayCommand]
     private async Task ShowAllCategoriesAsync()
     {
-        Reset();
-        await Task.CompletedTask;
+        await Shell.Current.GoToAsync("//main/categories");
     }
 
     [RelayCommand]
