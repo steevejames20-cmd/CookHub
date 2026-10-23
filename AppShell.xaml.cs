@@ -1,3 +1,4 @@
+using CookHub.Services;
 using CookHub.Views;
 
 namespace CookHub;
@@ -7,8 +8,13 @@ namespace CookHub;
 /// </summary>
 public partial class AppShell : Shell
 {
-    public AppShell()
+    public AppShell(IAuthService auth)
     {
         InitializeComponent();
+
+        // Écrans secondaires : ouverts par-dessus l'onglet courant,
+        // le retour se fait par la flèche en haut à gauche.
+        Routing.RegisterRoute("register", typeof(RegisterPage));
+
     }
 }

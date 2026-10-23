@@ -6,7 +6,7 @@
        FlyoutBehavior="Disabled"
        Shell.NavBarHasShadow="False">
 
-    <!-- Écran provisoire, remplacé par la connexion à l'étape suivante -->
-    <ShellContent Title="CookHub" Route="start" ContentTemplate="{DataTemplate views:StartPage}" />
+    <!-- Écran affiché avant l'authentification (premier élément = écran de départ) -->
+    <ShellContent Title="Connexion" Route="login" ContentTemplate="{DataTemplate views:LoginPage}" />
 
 </Shell>
