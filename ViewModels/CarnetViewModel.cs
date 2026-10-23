@@ -155,7 +155,7 @@ public partial class CarnetViewModel : ObservableObject
     [RelayCommand]
     private async Task AddFirstRecipeAsync()
     {
-        await Shell.Current.DisplayAlert("Ajouter une recette", "Le formulaire d'ajout sera créé à une étape suivante.", "OK");
+        await Shell.Current.GoToAsync("//main/ajouter");
     }
 
     /// <summary>Menu du compte (icône en haut à droite).</summary>

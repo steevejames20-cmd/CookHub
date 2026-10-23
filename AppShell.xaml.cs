@@ -16,6 +16,7 @@ public partial class AppShell : Shell
         // le retour se fait par la flèche en haut à gauche.
         Routing.RegisterRoute("register", typeof(RegisterPage));
         Routing.RegisterRoute("recipe", typeof(DetailPage));
+        Routing.RegisterRoute("share", typeof(SharePage));
 
         // Session déjà ouverte : on saute l'écran de connexion.
         if (auth.IsLoggedIn)
