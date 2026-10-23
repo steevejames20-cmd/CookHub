@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="CookHub.Controls.CategoryChips"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="Chips">
+    <!-- Rangée de puces de filtre qui passe à la ligne si elle manque de place. -->
+    <FlexLayout Wrap="Wrap"
+                Direction="Row"
+                AlignItems="Start"
+                JustifyContent="Start"
+                BindableLayout.ItemsSource="{Binding Items, Source={x:Reference Chips}}">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Border Style="{StaticResource Chip}" Margin="0,0,8,8">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Command, Source={x:Reference Chips}}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                    <!-- Puce sélectionnée : fond vert et texte clair -->
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+                            <Setter Property="Stroke" Value="{DynamicResource PrimaryBrush}" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Label Text="{Binding Label}" FontSize="13">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="{DynamicResource OnPrimary}" />
+                                <Setter Property="FontAttributes" Value="Bold" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Border>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+</ContentView>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="CookHub.Controls.FieldEntry"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls">
+    <!--
+        Champ de saisie de la charte graphique : libellé, boîte de saisie et texte d'aide.
+        Les quatre états de la charte sont gérés ici :
+        NORMAL, ACTIF (focus), ERREUR (texte d'erreur sous le champ) ; DESACTIVE concerne les boutons.
+    -->
+    <VerticalStackLayout Spacing="6">
+        <Label x:Name="CaptionLabel" Style="{StaticResource Caption}" />
+
+        <Border x:Name="Box" Style="{StaticResource FieldBox}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Entry x:Name="Input"
+                       VerticalOptions="Center"
+                       Focused="OnInputFocused"
+                       Unfocused="OnInputUnfocused"
+                       TextChanged="OnInputTextChanged" />
+
+                <!-- Bascule afficher / masquer le mot de passe -->
+                <controls:IconView x:Name="ToggleIcon" Grid.Column="1" Icon="eye" IsVisible="False">
+                    <controls:IconView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnToggleTapped" />
+                    </controls:IconView.GestureRecognizers>
+                </controls:IconView>
+
+                <!-- Coche affichée quand le champ est valide -->
+                <controls:IconView x:Name="ValidIcon" Grid.Column="1" Icon="check" IsVisible="False"
+                                   Fill="{DynamicResource PrimaryBrush}" />
+            </Grid>
+        </Border>
+
+        <Label x:Name="HelpLabel" Style="{StaticResource Help}" IsVisible="False" />
+    </VerticalStackLayout>
+</ContentView>
