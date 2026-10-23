@@ -1,3 +1,4 @@
+using CookHub.Services;
 using Microsoft.Extensions.Logging;
 
 namespace CookHub;
@@ -12,6 +13,11 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder.UseMauiApp<App>();
+
+        // Services : un seul exemplaire pour toute la durée de vie de l'application.
+        builder.Services.AddSingleton<DataStore>();
+        builder.Services.AddSingleton<IAuthService, AuthService>();
+        builder.Services.AddSingleton<IRecipeRepository, RecipeRepository>();
 
 #if DEBUG
         builder.Logging.AddDebug();
