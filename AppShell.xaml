@@ -9,4 +9,10 @@
     <!-- Écran affiché avant l'authentification (premier élément = écran de départ) -->
     <ShellContent Title="Connexion" Route="login" ContentTemplate="{DataTemplate views:LoginPage}" />
 
+    <!-- Barre de navigation inférieure : 4 onglets toujours accessibles -->
+    <TabBar x:Name="MainTabs" Route="main">
+        <ShellContent Title="Carnet" Icon="tab_carnet.svg" Route="carnet"
+                      ContentTemplate="{DataTemplate views:CarnetPage}" />
+    </TabBar>
+
 </Shell>

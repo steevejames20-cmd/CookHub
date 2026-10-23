@@ -59,7 +59,8 @@ public partial class LoginViewModel : ObservableObject
         }
 
         Password = string.Empty;
-        await Shell.Current.DisplayAlert("Connexion réussie", "Le carnet sera disponible à l'étape suivante.", "OK");
+        // "//main" : on repart de la racine, sur la barre d'onglets (le retour ne ramène pas à la connexion).
+        await Shell.Current.GoToAsync("//main");
     }
 
     [RelayCommand]

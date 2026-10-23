@@ -114,6 +114,7 @@ public partial class RegisterViewModel : ObservableObject
             return;
         }
 
-        await Shell.Current.DisplayAlert("Compte créé", "Le carnet sera disponible à l'étape suivante.", "OK");
+        // Compte créé : accès direct au carnet (état "carnet vide" pour un nouveau compte).
+        await Shell.Current.GoToAsync("//main");
     }
 }

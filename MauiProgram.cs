@@ -27,6 +27,10 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddTransient<RegisterPage>();
 
+        // Onglet Carnet
+        builder.Services.AddTransient<CarnetViewModel>();
+        builder.Services.AddTransient<CarnetPage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
