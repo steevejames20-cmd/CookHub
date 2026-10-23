@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CookHub.Views.AddRecipePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls"
+             Title="Ajouter"
+             Shell.NavBarIsVisible="False">
+    <!-- Interfaces 6 et 12 : Nouvelle recette, puis état "ajout avec erreurs". -->
+    <ScrollView>
+        <VerticalStackLayout Padding="24,16,24,32" Spacing="16">
+
+            <Label Text="Nouvelle recette" Style="{StaticResource Caption}" FontSize="15" />
+            <Label Text="Une recette à garder." Style="{StaticResource Display}" />
+            <Label Text="Les champs marqués d’un * sont obligatoires." Style="{StaticResource Help}" FontSize="14" />
+
+            <!-- Bandeau d'erreur : les informations déjà saisies sont conservées -->
+            <Border Style="{StaticResource ErrorBanner}" IsVisible="{Binding ShowErrorBanner}">
+                <HorizontalStackLayout Spacing="10">
+                    <controls:IconView Icon="alert" Fill="{DynamicResource ErrorBrush}" VerticalOptions="Start" />
+                    <VerticalStackLayout Spacing="2" WidthRequest="270">
+                        <Label Text="La recette n’a pas été enregistrée." TextColor="{DynamicResource Error}"
+                               FontAttributes="Bold" />
+                        <Label Text="Ajoutez un nom et au moins une étape. Vos autres informations sont conservées."
+                               TextColor="{DynamicResource Error}" FontSize="12" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- Photo : une seule par recette -->
+            <Border Style="{StaticResource Banner}" HeightRequest="150" Padding="0">
+                <Grid>
+                    <controls:IconView Icon="camera" WidthRequest="40" HeightRequest="40"
+                                       Fill="{DynamicResource PrimaryBrush}" />
+                    <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
+                </Grid>
+            </Border>
+
+            <controls:FieldEntry Caption="Nom de la recette *"
+                                 Placeholder="Ex. Tarte aux tomates"
+                                 Text="{Binding Name}"
+                                 Error="{Binding NameError}" />
+
+            <!-- Catégorie -->
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Catégorie *" Style="{StaticResource Caption}" />
+                <Border Style="{StaticResource FieldBox}">
+                    <Picker Title="Choisir une catégorie"
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding Category}" />
+                </Border>
+                <Label Text="{Binding CategoryError}" TextColor="{DynamicResource Error}" FontSize="12"
+                       IsVisible="{Binding CategoryError, Converter={StaticResource NotEmpty}}" />
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <controls:FieldEntry Caption="Préparation (min)" Placeholder="15" KeyboardType="Numeric"
+                                     Text="{Binding PrepMinutes}" />
+                <controls:FieldEntry Grid.Column="1" Caption="Cuisson (min)" Placeholder="30" KeyboardType="Numeric"
+                                     Text="{Binding CookMinutes}" />
+            </Grid>
+
+            <controls:FieldEntry Caption="Nombre de personnes" Placeholder="4" KeyboardType="Numeric"
+                                 Text="{Binding Servings}" />
+
+            <!-- Description -->
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Description" Style="{StaticResource Caption}" />
+                <Border Style="{StaticResource FieldBoxMulti}">
+                    <Editor Text="{Binding Description}" HeightRequest="80" AutoSize="Disabled"
+                            Placeholder="Quelques mots sur cette recette" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Ingrédients : une ligne par ingrédient -->
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Ingrédients" Style="{StaticResource Caption}" />
+                <Border Style="{StaticResource FieldBoxMulti}">
+                    <Editor Text="{Binding IngredientsText}" HeightRequest="120" AutoSize="Disabled"
+                            Placeholder="Une ligne par ingrédient" />
+                </Border>
+                <Label Text="Exemples : 4 tomates mûres, 2 c. à soupe moutarde, 80 g comté râpé."
+                       Style="{StaticResource Help}" />
+            </VerticalStackLayout>
+
+            <!-- Étapes : une ligne par étape (obligatoire) -->
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Étapes *" Style="{StaticResource Caption}" />
+                <Border Style="{StaticResource FieldBoxMulti}">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding StepsError, Converter={StaticResource NotEmpty}}"
+                                     Value="True">
+                            <Setter Property="Stroke" Value="{DynamicResource ErrorBrush}" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Editor Text="{Binding StepsText}" HeightRequest="140" AutoSize="Disabled"
+                            Placeholder="Une ligne par étape" />
+                </Border>
+                <Label Text="{Binding StepsError}" TextColor="{DynamicResource Error}" FontSize="12"
+                       IsVisible="{Binding StepsError, Converter={StaticResource NotEmpty}}" />
+            </VerticalStackLayout>
+
+            <Button Text="Enregistrer la recette" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding SaveCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

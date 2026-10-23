@@ -15,6 +15,8 @@
                       ContentTemplate="{DataTemplate views:CarnetPage}" />
         <ShellContent Title="Recherche" Icon="tab_recherche.svg" Route="recherche"
                       ContentTemplate="{DataTemplate views:SearchPage}" />
+        <ShellContent Title="Ajouter" Icon="tab_ajouter.svg" Route="ajouter"
+                      ContentTemplate="{DataTemplate views:AddRecipePage}" />
     </TabBar>
 
 </Shell>

@@ -39,6 +39,10 @@ public static class MauiProgram
         builder.Services.AddTransient<DetailViewModel>();
         builder.Services.AddTransient<DetailPage>();
 
+        // Onglet Ajouter
+        builder.Services.AddTransient<AddRecipeViewModel>();
+        builder.Services.AddTransient<AddRecipePage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
