@@ -94,4 +94,13 @@ public partial class DetailViewModel : ObservableObject, IQueryAttributable
         OnPropertyChanged(nameof(ServingsLabel));
     }
 
+    [RelayCommand]
+    private async Task ShareAsync()
+    {
+        if (_recipe is not null)
+        {
+            await Shell.Current.GoToAsync($"share?id={_recipe.Id}");
+        }
+    }
+
 }

@@ -47,6 +47,10 @@ public static class MauiProgram
         builder.Services.AddTransient<CategoriesViewModel>();
         builder.Services.AddTransient<CategoriesPage>();
 
+        // Partage d'une recette
+        builder.Services.AddTransient<ShareViewModel>();
+        builder.Services.AddTransient<SharePage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

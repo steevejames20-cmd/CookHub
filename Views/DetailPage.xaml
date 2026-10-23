@@ -7,6 +7,10 @@
              Shell.TabBarIsVisible="False">
     <!-- Interface 5 : Détail de recette (maquette, écran 5). Barre du haut fournie par le Shell. -->
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Partager" Command="{Binding ShareCommand}" />
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="0,0,0,32">
 
