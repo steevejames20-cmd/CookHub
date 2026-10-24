@@ -167,4 +167,23 @@ public partial class AddRecipeViewModel : ObservableObject
     private static int ParseNumber(string text, int fallback) =>
         int.TryParse(text.Trim(), out var value) && value >= 0 ? value : fallback;
 
+    /// <summary>Choisit une photo dans la galerie puis la réduit avant de l'enregistrer.</summary>
+    [RelayCommand]
+    private async Task PickPhotoAsync()
+    {
+        try
+        {
+            var result = await MediaPicker.Default.PickPhotoAsync(new MediaPickerOptions { Title = "Choisir une photo" });
+            if (result is null)
+            {
+                return;
+            }
+
+            PhotoPath = await PhotoCompressor.SaveCompressedAsync(result);
+        }
+        catch (Exception)
+        {
+            await Shell.Current.DisplayAlert("Photo", "La photo n'a pas pu être ajoutée. Vos autres informations sont conservées.", "OK");
+        }
+    }
 }

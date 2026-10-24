@@ -34,6 +34,8 @@
                     <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
                 </Grid>
             </Border>
+            <Button Text="Choisir une photo" Style="{StaticResource SecondaryButton}"
+                    Command="{Binding PickPhotoCommand}" />
 
             <controls:FieldEntry Caption="Nom de la recette *"
                                  Placeholder="Ex. Tarte aux tomates"

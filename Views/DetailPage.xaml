@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CookHub.Views.DetailPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CookHub.Controls"
+             Title="Dans mon carnet"
+             Shell.TabBarIsVisible="False">
+    <!-- Interface 5 : Détail de recette (maquette, écran 5). Barre du haut fournie par le Shell. -->
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Partager" Command="{Binding ShareCommand}" />
+        <ToolbarItem Text="Supprimer" Order="Secondary" Command="{Binding DeleteCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="0,0,0,32">
+
+            <!-- Photo en tête de recette (fond sauge si aucune photo) -->
+            <Grid HeightRequest="240" BackgroundColor="{DynamicResource Sage}">
+                <controls:IconView Icon="book" WidthRequest="48" HeightRequest="48"
+                                   Fill="{DynamicResource PrimaryBrush}" />
+                <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
+            </Grid>
+
+            <VerticalStackLayout Padding="24,0" Spacing="16">
+
+                <HorizontalStackLayout Spacing="8">
+                    <Border Style="{StaticResource Chip}" BackgroundColor="{DynamicResource Primary}"
+                            Stroke="{DynamicResource PrimaryBrush}" Padding="12,6">
+                        <Label Text="{Binding Category}" TextColor="{DynamicResource OnPrimary}" FontSize="12"
+                               FontAttributes="Bold" />
+                    </Border>
+                    <Border Style="{StaticResource Chip}" Padding="12,6">
+                        <Label Text="{Binding Difficulty}" FontSize="12" />
+                    </Border>
+                </HorizontalStackLayout>
+
+                <Label Text="{Binding Name}" Style="{StaticResource Display}" />
+                <Label Text="{Binding Description}" Style="{StaticResource Help}" FontSize="14" />
+                <Label Text="{Binding AddedLabel}" Style="{StaticResource Help}" />
+
+                <!-- Bandeau : préparation, cuisson, portions -->
+                <Border Style="{StaticResource Banner}">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Préparation" Style="{StaticResource Help}" />
+                            <Label Text="{Binding PrepText}" Style="{StaticResource Heading}" FontSize="18" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="Cuisson" Style="{StaticResource Help}" />
+                            <Label Text="{Binding CookText}" Style="{StaticResource Heading}" FontSize="18" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2" Spacing="2">
+                            <Label Text="Portions" Style="{StaticResource Help}" />
+                            <Label Text="{Binding ServingsText}" Style="{StaticResource Heading}" FontSize="18" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Ingrédients -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Ingrédients" Style="{StaticResource Heading}" />
+                    <Label Grid.Column="1" Text="{Binding ServingsLabel}" Style="{StaticResource LinkLabel}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Ingredients}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto,110,*" ColumnSpacing="8">
+                                <Label Grid.Column="1" Text="{Binding Quantity}" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="2" Text="{Binding Name}" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <!-- Étapes de préparation -->
+                <Label Text="Préparation" Style="{StaticResource Heading}" Margin="0,8,0,0" />
+                <VerticalStackLayout Spacing="12" BindableLayout.ItemsSource="{Binding Steps}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border BackgroundColor="{DynamicResource Sage}" StrokeThickness="0"
+                                        WidthRequest="28" HeightRequest="28" VerticalOptions="Start">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="14" />
+                                    </Border.StrokeShape>
+                                    <Label Text="{Binding Number}" FontSize="13" FontAttributes="Bold"
+                                           TextColor="{DynamicResource Primary}"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Text}" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
