@@ -64,10 +64,21 @@
                            VerticalOptions="Center" />
                 </Grid>
 
+                <!-- Choix du nombre de personnes : les quantités se recalculent -->
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                    <Button Text="-" Style="{StaticResource SecondaryButton}" WidthRequest="48" HeightRequest="40"
+                            Padding="0" Command="{Binding DecreaseServingsCommand}" />
+                    <Label Text="{Binding Servings}" Style="{StaticResource Heading}" FontSize="20"
+                           VerticalOptions="Center" WidthRequest="32" HorizontalTextAlignment="Center" />
+                    <Button Text="+" Style="{StaticResource SecondaryButton}" WidthRequest="48" HeightRequest="40"
+                            Padding="0" Command="{Binding IncreaseServingsCommand}" />
+                </HorizontalStackLayout>
+
                 <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Ingredients}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid ColumnDefinitions="Auto,110,*" ColumnSpacing="8">
+                                <CheckBox IsChecked="{Binding IsChecked}" />
                                 <Label Grid.Column="1" Text="{Binding Quantity}" FontAttributes="Bold"
                                        VerticalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Name}" VerticalOptions="Center" />

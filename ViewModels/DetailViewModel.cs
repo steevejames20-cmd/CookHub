@@ -50,7 +50,12 @@ public partial class DetailViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty]
     private string _servingsText = string.Empty;
 
-    public string ServingsLabel => $"Pour {_recipe?.Servings ?? 0} personnes";
+    /// <summary>Nombre de personnes choisi par l'utilisateur (les quantités sont recalculées).</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ServingsLabel))]
+    private int _servings;
+
+    public string ServingsLabel => $"Pour {Servings} {(Servings > 1 ? "personnes" : "personne")}";
 
     /// <summary>Reçoit l'identifiant de la recette depuis la route de navigation.</summary>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -79,6 +84,8 @@ public partial class DetailViewModel : ObservableObject, IQueryAttributable
         CookText = $"{_recipe.CookMinutes} min";
         ServingsText = $"{_recipe.Servings} pers.";
 
+        Servings = _recipe.Servings;
+
         Ingredients.Clear();
         foreach (var ingredient in _recipe.Ingredients)
         {
@@ -91,7 +98,6 @@ public partial class DetailViewModel : ObservableObject, IQueryAttributable
             Steps.Add(new StepItem(i + 1, _recipe.Steps[i]));
         }
 
-        OnPropertyChanged(nameof(ServingsLabel));
     }
 
     [RelayCommand]
@@ -126,4 +132,25 @@ public partial class DetailViewModel : ObservableObject, IQueryAttributable
         await Shell.Current.GoToAsync("..");
     }
 
+    [RelayCommand]
+    private void IncreaseServings() => ChangeServings(Servings + 1);
+
+    [RelayCommand]
+    private void DecreaseServings() => ChangeServings(Servings - 1);
+
+    /// <summary>Change le nombre de personnes (entre 1 et 50) et recalcule chaque quantité.</summary>
+    private void ChangeServings(int newValue)
+    {
+        if (_recipe is null || newValue < 1 || newValue > 50)
+        {
+            return;
+        }
+
+        Servings = newValue;
+        var factor = (double)newValue / Math.Max(1, _recipe.Servings);
+        foreach (var ingredient in Ingredients)
+        {
+            ingredient.Scale(factor);
+        }
+    }
 }
