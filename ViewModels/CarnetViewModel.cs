@@ -162,8 +162,15 @@ public partial class CarnetViewModel : ObservableObject
     [RelayCommand]
     private async Task OpenAccountMenuAsync()
     {
+        var themeAction = ThemeService.IsDark ? "Passer au thème clair" : "Passer au thème sombre";
         var choice = await Shell.Current.DisplayActionSheet(
-            $"Compte de {_auth.CurrentFirstName}", "Annuler", null, "Se déconnecter");
+            $"Compte de {_auth.CurrentFirstName}", "Annuler", null, themeAction, "Se déconnecter");
+
+        if (choice == themeAction)
+        {
+            ThemeService.SetDark(!ThemeService.IsDark);
+            return;
+        }
 
         if (choice == "Se déconnecter")
         {
