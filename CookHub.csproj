@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<!-- Cible Android uniquement : le mode simulation utilise l'émulateur Android. -->
-		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CookHub</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -32,8 +32,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.110" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<!-- MVVM : génération automatique des propriétés et des commandes -->
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	</ItemGroup>
